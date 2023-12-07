@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorted Score (Mostafa-Mohades)</title>
+<style>
+  /* Improved styling for better readability and design */
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Added for consistent sizing */
+  }
+  button {
+    padding: 10px 20px;
+    background-color: #ff006a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  }
+  button:hover {
+    background-color: #00c3ff;
+  }
+  .results {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body dir="rtl">
+<h2 style="background-color: orange; display: inline;">پیشخوان نمرات و اطلاعات دانشجویان (مصطفی محدث)</h2>
+<!-- Form for student data input -->
+<div class="form-group">
+  <br>
+  <label for="name">نام:</label>
+  <input type="text" id="name" placeholder="نام خود را وارد کنید">
+</div>
+<div class="form-group">
+  <label for="lastname">نام خوانوادگی:</label>
+  <input type="text" id="lastname" placeholder="نام خانوادگی خود را وارد کنید">
+</div>
+<div class="form-group">
+  <label for="age">سال تولد:</label>
+  <select id="age">
+    <!-- Options generated using JavaScript -->
+  </select>
+</div>
+<div class="form-group">
+  <label for="studentNumber">شماره دانشجویی:</label>
+  <input type="text" id="studentNumber" placeholder="شماره دانشجویی خود را وارد کنید">
+</div>
+<!-- Form for student scores input -->
+<div class="form-group">
+  <label for="score1">نمره 1:</label>
+  <input type="number" id="score1" placeholder="نمره 1 را وارد کنید">
+</div>
+<div class="form-group">
+  <label for="score2">نمره 2:</label>
+  <input type="number" id="score2" placeholder="نمره 2 را وارد کنید">
+</div>
+<div class="form-group">
+  <label for="score3">نمره 3:</label>
+  <input type="number" id="score3" placeholder="نمره 3 را وارد کنید">
+</div>
+<div class="form-group">
+  <label for="score4">نمره 4:</label>
+  <input type="number" id="score4" placeholder="نمره 4 را وارد کنید">
+</div>
+<div class="form-group">
+  <label for="score5">نمره 5:</label>
+  <input type="number" id="score5" placeholder="نمره 5 را وارد کنید">
+</div>
+<button onclick="sortScores()">نمایش مرتب نمرات</button>
+<div class="results" id="results"></div>
+<script>
+  // Function to generate year options for the age select element
+  const ageSelect = document.getElementById('age');
+  for (let year = 1320; year <= 1400; year++) {
+    const option = document.createElement('option');
+    option.value = year;
+    option.textContent = year;
+    ageSelect.appendChild(option);
+  }
+
+  // Function to sort and display scores along with name, last name, and age
+  function sortScores() {
+    const name = document.getElementById('name').value;
+    const lastname = document.getElementById('lastname').value;
+    const age = document.getElementById('age').value;
+    const scores = [
+      parseInt(document.getElementById('score1').value),
+      parseInt(document.getElementById('score2').value),
+      parseInt(document.getElementById('score3').value),
+      parseInt(document.getElementById('score4').value),
+      parseInt(document.getElementById('score5').value)
+    ].filter(score => !isNaN(score)); // Filter out NaN values
+
+    // Sort scores in ascending order
+    scores.sort((a, b) => a - b);
+
+    // Display sorted scores along with name, last name, and age
+    document.getElementById('results').innerHTML = `نام: ${name}<br><br>نام خانوادگی: ${lastname}<br><br>سال تولد: ${age}<br><br>نمرات (مرتب شده): ${scores.join(', ')}`;
+  }
+</script>
+</body>
+</html>
